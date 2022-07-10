@@ -301,5 +301,17 @@ class TestObjects(unittest.TestCase):
         self.assertEqual(card.index, peeked.index)
         self.assertEqual(len(collection.collection), 52)
 
+    def test_CardCollection_length_1(self):
+        # Tests that the get_length() function works as expected
+        # after creating a standard deck and after dealing some
+        # cards
+        collection = CardCollection()
+        collection.new_deck()
+
+        self.assertEqual(collection.get_length(), 52)
+        dealt = collection.deal(num_cards=3)
+        self.assertEqual(collection.get_length(), 49)
+
+
 if __name__ == "__main__":
     unittest.main()

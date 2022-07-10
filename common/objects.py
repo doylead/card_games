@@ -144,3 +144,7 @@ class CardCollection:
     def peek(self):
         # Return a copy of the last (most recently added) card in a collection
         return self.collection[-1]
+
+    def get_length(self):
+        # Return the number of cards in the collection
+        return len(self.collection)
