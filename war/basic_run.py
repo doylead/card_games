@@ -17,3 +17,36 @@
 # face down.  In practice, this means that neither this card's rank
 # nor suit matters.  Return to Step 3.
 
+## Necessary imports
+from sys import path as pythonpath
+pythonpath.append('../common')
+from objects import Card, CardCollection
+
+## Initialize a new deck
+deck = CardCollection()
+deck.new_deck()
+deck.shuffle()
+
+## Instantiate the CardCollection objects
+# TODO the link between a player's deck and discard pile is not easily shown.
+# TODO should we add a new type of object that combines the two?
+playerA_deck, playerB_deck = deck.split(num_split=2)
+playerA_discard = CardCollection()
+playerB_discard = CardCollection()
+playerA_active = CardCollection()
+playerB_active = CardCollection()
+
+# Gameplay loop
+while playerA.get_length() not in [0,52]:
+    # Flip cards face-up
+    playerA_active.add_card(playerA_deck.deal())
+    playerB_active.add_card(playerB_deck.deal())
+
+    # Check to see if either player has won
+    if playerA_active.peek() > playerB_active.peek():
+        pass # TODO Should a CardCollection have an add_cards method?
+    elif playerB_active.peek() > playerB_active.peek():
+        pass # TODO Parallel above
+    else:
+        # The rank of both cards is equal
+        # TODO Add additional cards to the active area
