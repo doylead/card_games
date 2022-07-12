@@ -1,5 +1,5 @@
 import unittest
-from objects import Card, CardCollection
+from cards import Card, CardCollection
 
 class TestObjects(unittest.TestCase):
 
@@ -148,7 +148,7 @@ class TestObjects(unittest.TestCase):
         self.assertEqual(card.index, dealt.index)
         self.assertEqual(len(collection.collection), 0)
 
-    def test_valid_CardCollection_5(self):
+    def test_valid_CardCollection_4(self):
         # Test creating a CardCollection with multiple cards as in
         # test_validCardCollection_2
         card0 = Card(rank="Jack", suit="Spades")
@@ -185,7 +185,7 @@ class TestObjects(unittest.TestCase):
 
         pass
 
-    def test_valid_CardCollection_6(self):
+    def test_valid_CardCollection_5(self):
         # Test creating a CardCollection with multiple cards as in
         # test_valid_CardCollection_3
         card0 = Card(rank="Jack", suit="Spades")
@@ -228,7 +228,7 @@ class TestObjects(unittest.TestCase):
 
         pass
 
-    def test_valid_CardCollection_7(self):
+    def test_valid_CardCollection_6(self):
         # Tests that we can create a standard (single) deck of
         # cards with the correct number of unique cards
         collection = CardCollection()

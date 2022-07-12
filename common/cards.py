@@ -66,17 +66,29 @@ class CardCollection:
         # Handle a predictable user behavior where they pass one card rather
         # than a list of length one
         if isinstance(cards, Card):
-            cards = [cards]
+            self.add_card(cards)
 
         # If a list of cards was provided, add them to the initial collection
-        for card in cards:
-            self.add_card(card)
+        elif isinstance(cards, list):
+            for card in cards:
+                assert isinstance(card, Card)
+                self.add_card(card)
 
-    def add_card(self, new_card):
+        elif cards != []:
+            raise NotImplementedError
+
+    def add_card(self, card):
         # Check the type of the input object, and if it is a Card add it to
         # (the end of) the collection
-        assert isinstance(new_card, Card)
-        self.collection.append(new_card)
+        assert isinstance(card, Card)
+        self.collection.append(card)
+
+    def add_cards(self, cardcollection):
+        # Check the type of the input object, and if it is a CardCollection
+        # add its contents to the end of this collection
+        assert isinstance(card, CardCollection)
+        for card in cardcollection.collection:
+            self.add_card(card)
 
     def new_deck(self, num_decks=1, include_joker=False):
         # Create an integer num_decks standard deck(s) of playing cards
