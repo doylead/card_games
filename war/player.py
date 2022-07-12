@@ -32,7 +32,7 @@ class WarPlayer:
 
     # Add all cards from a CardCollection object to one of this player's
     # collections
-    def add(self, collection, collection_name):
+    def combine(self, collection, collection_name):
         assert isinstance(collection, CardCollection)
         assert collection_name in ["deck", "discard", "active"]
 
@@ -43,8 +43,30 @@ class WarPlayer:
         if collection_name == "active":
             self.active.add_cardcollection(collection)
 
-    # TODO: We'll need functions for fllipping a card, reshuffling the
-    # discard pile into the deck, and getting the top card of the active area
-    # We will also need to design unit tests
+    # Shuffle the discard pile and then add it to the deck
+    def reshuffle(self):
+        self.discard.shuffle()
+        self.combine(self.empty("discard"), "deck")
 
+    # Move the top card of the deck into the active area
+    def flip(self):
+        # If the deck is empty, shuffle the discard pile and
+        # add it to the deck
+        if self.deck.get_length() == 0:
+            self.reshuffle()
 
+        # If the deck is still empty, there are no cards in deck or
+        # discard pile.  This is currently undefined behavior
+        if self.deck.get_length() == 0:
+            raise NotImplementedError
+
+        # Add the top card of the deck to the active CardCollection
+        self.active.add_card(self.deck.deal(num_cards=1))
+
+    # Return a copy of the top card of the active area
+    def peek_active(self):
+        return self.active.peek()
+
+    # Return the number of cards in the deck and discard piles combined
+    def get_controlled(self):
+        return self.deck.get_length() + self.discard.get_length()

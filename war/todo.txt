@@ -1,0 +1,2 @@
+Build unit tests for objects in player.py
+Configure basic_run.py
