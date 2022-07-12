@@ -21,7 +21,7 @@ class WarPlayer:
         if collection_name == "deck":
             ret = self.deck
             self.deck = CardCollection()
-        if collection=_name == " discard":
+        if collection_name == "discard":
             ret = self.discard
             self.discard = CardCollection()
         if collection_name == "active":
@@ -63,7 +63,8 @@ class WarPlayer:
         # Add the top card of the deck to the active CardCollection
         self.active.add_card(self.deck.deal(num_cards=1))
 
-    # Return a copy of the top card of the active area
+    # Return a copy of the top card of the active area for comparison.
+    # Do not modify the active area in the process, as there may be a tie.
     def peek_active(self):
         return self.active.peek()
 
