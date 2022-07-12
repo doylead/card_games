@@ -20,7 +20,7 @@
 ## Necessary imports
 from sys import path as pythonpath
 pythonpath.append('../common')
-from objects import Card, CardCollection
+from cards import Card, CardCollection
 
 ## Initialize a new deck
 deck = CardCollection()
