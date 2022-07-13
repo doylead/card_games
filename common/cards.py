@@ -86,7 +86,7 @@ class CardCollection:
     def add_cardcollection(self, cardcollection):
         # Check the type of the input object, and if it is a CardCollection
         # add its contents to the end of this collection
-        assert isinstance(card, CardCollection)
+        assert isinstance(cardcollection, CardCollection)
         for card in cardcollection.collection:
             self.add_card(card)
 

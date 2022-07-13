@@ -1,2 +1,5 @@
 Build unit tests for objects in player.py
+* Empty
+* Reshuffle
+* Get Controlled
 Configure basic_run.py

@@ -1,6 +1,6 @@
 from sys import path as pythonpath
-pythonpath.append('../common')
-from cards import Card, CardCollection
+pythonpath.append('../')
+from common.cards import Card, CardCollection
 
 class WarPlayer:
     # A class of objects used to representing a player in the game of war.
@@ -30,23 +30,10 @@ class WarPlayer:
 
         return ret
 
-    # Add all cards from a CardCollection object to one of this player's
-    # collections
-    def combine(self, collection, collection_name):
-        assert isinstance(collection, CardCollection)
-        assert collection_name in ["deck", "discard", "active"]
-
-        if collection_name == "deck":
-            self.deck.add_cardcollection(collection)
-        if collection_name == "discard":
-            self.discard.add_cardcollection(collection)
-        if collection_name == "active":
-            self.active.add_cardcollection(collection)
-
     # Shuffle the discard pile and then add it to the deck
     def reshuffle(self):
         self.discard.shuffle()
-        self.combine(self.empty("discard"), "deck")
+        self.deck.add_cardcollection(self.discard.empty())
 
     # Move the top card of the deck into the active area
     def flip(self):

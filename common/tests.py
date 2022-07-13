@@ -1,5 +1,7 @@
 import unittest
-from cards import Card, CardCollection
+from sys import path as pythonpath
+pythonpath.append('../')
+from common.cards import Card, CardCollection
 
 class TestObjects(unittest.TestCase):
 
@@ -311,6 +313,14 @@ class TestObjects(unittest.TestCase):
         self.assertEqual(collection.get_length(), 52)
         dealt = collection.deal(num_cards=3)
         self.assertEqual(collection.get_length(), 49)
+
+    def test_addcardcollection(self):
+        # Tests that we can add one CardCollection to another
+        collection1 = CardCollection()
+        collection1.new_deck()
+        collection2 = CardCollection()
+        collection2.new_deck()
+        collection1.add_cardcollection(collection2)
 
 
 if __name__ == "__main__":
