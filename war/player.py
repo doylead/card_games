@@ -33,7 +33,7 @@ class WarPlayer:
     # Shuffle the discard pile and then add it to the deck
     def reshuffle(self):
         self.discard.shuffle()
-        self.deck.add_cardcollection(self.discard.empty())
+        self.deck.add_cardcollection(self.empty(collection_name="discard"))
 
     # Move the top card of the deck into the active area
     def flip(self):
