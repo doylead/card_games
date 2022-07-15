@@ -1,1 +1,11 @@
 Configure basic_run.py
+    * Develop known test case to test
+
+Configur multi_run.py
+    * What percentage of games reach undefined behavior?
+    * What is the distribution of number of turns taken?
+    * Visualize oscillation in card advantage
+        - This is continuous.  Abs(playerA.get_controlled() - playerB.get_controlled()) will show how much either
+        player is winning by, without showing us which player is winning.  This may be easier for plotting.  This
+        quantity will reach 52 when the game is over, which may be a natural stopping criteria for the loop shown
+        in basic_run.py

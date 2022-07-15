@@ -19,34 +19,58 @@
 
 ## Necessary imports
 from sys import path as pythonpath
-pythonpath.append('../common')
-from cards import Card, CardCollection
+pythonpath.append('../')
+from common.cards import Card, CardCollection
+from war.player import WarPlayer
 
-## Initialize a new deck
+## Initialize a new deck and new players
 deck = CardCollection()
 deck.new_deck()
 deck.shuffle()
+playerA = WarPlayer()
+playerB = WarPlayer()
 
-## Instantiate the CardCollection objects
-# TODO the link between a player's deck and discard pile is not easily shown.
-# TODO should we add a new type of object that combines the two?
-playerA_deck, playerB_deck = deck.split(num_split=2)
-playerA_discard = CardCollection()
-playerB_discard = CardCollection()
-playerA_active = CardCollection()
-playerB_active = CardCollection()
+## Split the deck between the playesr
+deckA, deckB = deck.split(num_split=2)
+playerA.deck.add_cardcollection(deckA)
+playerB.deck.add_cardcollection(deckB)
+
+# Avoid confusion later - we're done with these
+del deckA, deckB
+
+# Basic stats
+num_turns = 0
 
 # Gameplay loop
-while playerA.get_length() not in [0,52]:
+while playerA.get_controlled() not in [0,52]:
     # Flip cards face-up
-    playerA_active.add_card(playerA_deck.deal())
-    playerB_active.add_card(playerB_deck.deal())
+    playerA.flip()
+    playerB.flip()
 
     # Check to see if either player has won
-    if playerA_active.peek() > playerB_active.peek():
-        pass # TODO Should a CardCollection have an add_cards method?
-    elif playerB_active.peek() > playerB_active.peek():
-        pass # TODO Parallel above
+    if playerA.peek_active() > playerB.peek_active():
+        # Add both players' active areas to playerA's discard pile
+        # and empty both players' active areas
+        playerA.discard.add_cardcollection(playerA.empty("active"))
+        playerA.discard.add_cardcollection(playerB.empty("active"))
+
+    elif playerB.peek_active() > playerA.peek_active():
+        # Add both players' active areas to playerB's discard pile
+        # and empty both players' active areas
+        playerB.discard.add_cardcollection(playerA.empty("active"))
+        playerB.discard.add_cardcollection(playerB.empty("active"))
+
     else:
-        # The rank of both cards is equal
-        # TODO Add additional cards to the active area
+        # The rank of both cards is equal - flip another card "face down" (it
+        # identity will never be referenced, but can be moved between decks)
+        playerA.flip()
+        playerB.flip()
+
+    num_turns += 1
+
+# Basic checks
+assert playerA.active.get_length() == 0
+assert playerB.active.get_length() == 0
+assert playerA.get_controlled() != playerB.get_controlled()
+assert (playerA.get_controlled() + playerB.get_controlled()) == 52
+print(num_turns)
