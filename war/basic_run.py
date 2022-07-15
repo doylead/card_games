@@ -43,6 +43,15 @@ num_turns = 0
 
 # Gameplay loop
 while playerA.get_controlled() not in [0,52]:
+    # TODO - This does *not* verify that both players have some cards they can
+    # flip. It simply shows that the total number of cards in one players active
+    # and discard piles is not 52 - it's perfectly possible for there to be
+    # cards still in both players' active areas.  I'm honestly not sure how to
+    # resolve this right now in terms of game rules, but we could perform a
+    # check on logic here for if either players deck and discard are both empty,
+    # perhaps comparing the active card (including "face down") cards in
+    # that case
+
     # Flip cards face-up
     playerA.flip()
     playerB.flip()
