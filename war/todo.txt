@@ -7,7 +7,6 @@ Configure simulation.py
         in basic_run.py
 
 Possibilities:
-    * Update simulation.py for multithreading support
     * Does simulation timing change if we add in additional rules?  Is the exception taking longer than
     completed games would?
     * Test different methods of breaking indeterminate games

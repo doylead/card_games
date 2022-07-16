@@ -5,17 +5,27 @@ pythonpath.append('../')
 from war.game import play_war
 import pickle
 import time
+import multiprocessing as mp
 
 num_turns = []
-num_sims = int(2.5e4)
+num_sims = int(1e6)
 t1 = time.time()
 
-for i in range(num_sims):
+def simulate(i):
     try:
-        num_turns.append(play_war(debug=False,
-                                  index=i))
+        var = play_war(debug=False, index=i)
     except:
-        pass
+        var = 0
+    return var
+
+# Let's get fancy with parallel processing
+pool = mp.Pool(mp.cpu_count())
+
+# This will include zeros, showing we ran into an exception
+num_turns = pool.map(simulate, range(num_sims))
+
+# This will not include zeros from exceptions
+num_turns = [i for i in num_turns if i != 0]
 
 t2 = time.time()
 
