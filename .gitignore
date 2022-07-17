@@ -2,4 +2,4 @@
 common/__pycache__/
 war/__pycache__/
 war/logs/
-analysis/*pickle
+analysis/pickles/*pickle

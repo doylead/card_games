@@ -1,7 +1,7 @@
 # Simulate several games of war to determine its properties
 
 from sys import path as pythonpath
-pythonpath.append('../')
+pythonpath.append('../../')
 from war.game import play_war
 import pickle
 import time
