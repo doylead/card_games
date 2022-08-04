@@ -1,4 +1,3 @@
-import pylab as plt
 from random import shuffle
 
 class Card:
